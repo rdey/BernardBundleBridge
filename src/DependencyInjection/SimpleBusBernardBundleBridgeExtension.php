@@ -4,7 +4,7 @@ namespace SimpleBus\BernardBundleBridge\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\DefinitionDecorator;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
@@ -82,7 +82,7 @@ class SimpleBusBernardBundleBridgeExtension extends ConfigurableExtension implem
         $queueNameResolver = $config['queue_name_resolver'];
 
         if (in_array($queueNameResolver, ['fixed', 'class_based', 'mapped'])) {
-            $definition = new DefinitionDecorator(sprintf('simple_bus.bernard_bundle_bridge.routing.%s_queue_name_resolver', $queueNameResolver));
+            $definition = new ChildDefinition(sprintf('simple_bus.bernard_bundle_bridge.routing.%s_queue_name_resolver', $queueNameResolver));
 
             if ($queueNameResolver === 'fixed') {
                 $definition->replaceArgument(0, $config['queue_name']);
