@@ -12,7 +12,7 @@
             <argument>event</argument>
         </service>
 
-        <service id="simple_bus.bernard_bundle_bridge.event_consumer" class="SimpleBus\BernardBundleBridge\BernardConsumer">
+        <service id="simple_bus.bernard_bundle_bridge.event_consumer" class="SimpleBus\BernardBundleBridge\BernardConsumer" public="true">
             <argument type="service" id="simple_bus.asynchronous.standard_serialized_event_envelope_consumer" />
         </service>
 
